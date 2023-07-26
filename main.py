@@ -26,9 +26,9 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)         #如果訊息是文字
 def handle_message(event):
     line_bot_api.reply_message(event.reply_token,TextSendMessage(text='test'))  #回傳'test'
-    id = event.source.user_id
-    profile = line_bot_api.get_profile(id)
-    log(id, profile.display_name, event.message.text)pip install jieba
+    id = event.source.user_id        #抓取使用者id
+    profile = line_bot_api.get_profile(id)        #抓取使用者資料
+    log(id, profile.display_name, event.message.text)        #紀錄log中
 
 if __name__ == "__main__":
     app.run()
