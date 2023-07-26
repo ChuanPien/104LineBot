@@ -1,4 +1,4 @@
-#import selenium 模組
+#import selenium 相關函式庫
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
