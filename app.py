@@ -7,14 +7,14 @@ from logs.log import log
 import json
 
 #讀取設定檔
-with open('config.json', 'r', encoding='utf8')as J:
+with open('UserConfig/config.json', 'r', encoding='utf8')as J:
     j = json.load(J)
 
 app = Flask(__name__)
 line_bot_api = LineBotApi(j['token'])
 handler = WebhookHandler(j['secret'])
 
-#基礎碼
+#基底碼
 @app.route("/", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']      # 加入回傳的 headers

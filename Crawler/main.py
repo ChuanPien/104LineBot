@@ -9,16 +9,16 @@ from selenium.webdriver.common.action_chains import ActionChains
 import time, json
 
 #讀取設定檔
-with open('config.json', 'r', encoding='utf8')as J:     
+with open('UserConfig/config.json', 'r', encoding='utf8')as J:     
     j = json.load(J)
 
 #預建立JSON資料檔案
-with open("Crawler/data.json", "a") as f:
+with open("Crawler/city.json", "a") as f:                           #city.json地區資料/job.json工作資料
     json.dump([], f)
     f.close()
 
 #寫入JSON
-def write_json(new_data, file='Crawler/data.json'):
+def write_json(new_data, file='Crawler/city.json'):                 #city.json地區資料/job.json工作資料
     with open(file,'r+', encoding='utf8') as f:
         file_data = json.load(f)                                                #讀取JSON現有資料
         file_data.append(new_data)                                              #將新資料與舊資料結合
@@ -45,7 +45,7 @@ WebDriverWait(driver, 100.0).until(
     )
 
 #模擬點擊[職務類別選單]
-ijob = driver.find_element(By.ID, "ijob")
+ijob = driver.find_element(By.ID, "icity")                          #icity資料選單/ijob資料選單
 action = ActionChains(driver).click(ijob).perform()
 
 #等待網頁元素出現
@@ -57,7 +57,7 @@ WebDriverWait(driver, 100.0).until(
 arrows = driver.find_elements(By.CLASS_NAME, "arrow--right")                        #抓取大類別
 for arrow in arrows:
     i = 0
-    job = []
+    data = []
     action = ActionChains(driver).click(arrow).perform()                            #依序打開
     ardowns = driver.find_elements(By.CLASS_NAME, "arrow--down")                    #抓取中類別
     for ardown in ardowns[1:]:
@@ -65,13 +65,13 @@ for arrow in arrows:
         l2s = driver.find_elements(By.CLASS_NAME, "category-item--level-two")       #抓取中類別
         l3s = driver.find_elements(By.CLASS_NAME, "category-item--level-three")     #抓取小類別
         time.sleep(0.2)                                                             #等待0.2秒
-        #依序將l3s中的文字提出並放入job陣列中
+        #依序將l3s中的文字提出並放入data陣列中
         for l3 in l3s:
             if l3.text != '':
-                job.append(l3.text)
-        write_json({l2s[i].text: job,})                                             #呼叫寫入JSON方法
-        l3s.clear()                                                                 #清空l3s資料
-        job.clear()                                                                 #清空job資料
+                data.append(l3.text)
+        write_json({l2s[i].text: data,})                                             #呼叫寫入JSON方法
+        l3s.clear()                                                                  #清空l3s資料
+        data.clear()                                                                 #清空data資料
         i += 1
         arrowup = driver.find_element(By.CLASS_NAME, "arrow--up")                   #抓取打開的小類別
         actions = ActionChains(driver).click(arrowup).perform()                     #關閉小類別
