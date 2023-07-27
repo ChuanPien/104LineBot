@@ -20,11 +20,11 @@ with open("Crawler/data.json", "a") as f:
 #寫入JSON
 def write_json(new_data, file='Crawler/data.json'):
     with open(file,'r+', encoding='utf8') as f:
-        file_data = json.load(f)                                                # 讀取JSON現有資料
-        file_data.append(new_data)                                              # 將新資料與舊資料結合
-        f.seek(0)                                                               # 設定輸入位置
-        f.write(json.dumps(file_data, ensure_ascii = False, indent = 2))        # 寫入                                                   
-        f.close()                                                               # 關閉
+        file_data = json.load(f)                                                #讀取JSON現有資料
+        file_data.append(new_data)                                              #將新資料與舊資料結合
+        f.seek(0)                                                               #設定輸入位置
+        f.write(json.dumps(file_data, ensure_ascii = False, indent = 2))        #寫入                                                   
+        f.close()                                                               #關閉
 
 #設定Chrome參數
 def setup():
@@ -64,15 +64,14 @@ for arrow in arrows:
         action = ActionChains(driver).click(ardown).perform()                       #依序打開
         l2s = driver.find_elements(By.CLASS_NAME, "category-item--level-two")       #抓取中類別
         l3s = driver.find_elements(By.CLASS_NAME, "category-item--level-three")     #抓取小類別
-        time.sleep(0.2)
+        time.sleep(0.2)                                                             #等待0.2秒
+        #依序將l3s中的文字提出並放入job陣列中
         for l3 in l3s:
             if l3.text != '':
                 job.append(l3.text)
-        write_json({
-                l2s[i].text: job,
-            })
-        l3s.clear()
-        job.clear()
+        write_json({l2s[i].text: job,})                                             #呼叫寫入JSON方法
+        l3s.clear()                                                                 #清空l3s資料
+        job.clear()                                                                 #清空job資料
         i += 1
         arrowup = driver.find_element(By.CLASS_NAME, "arrow--up")                   #抓取打開的小類別
         actions = ActionChains(driver).click(arrowup).perform()                     #關閉小類別
