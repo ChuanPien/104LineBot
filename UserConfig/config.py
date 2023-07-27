@@ -13,7 +13,7 @@ temp = {
 def write_json(file, new_data):
     file = f'UserConfig/{file}.json'
     if not os.path.isfile(file):
-        with open(file, "a", encoding='utf8') as f:
+        with open(file, "w", encoding='utf8') as f:
             f.write(json.dumps(temp, ensure_ascii = False, indent = 4))
             f.close()
 
