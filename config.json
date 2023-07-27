@@ -1,5 +1,5 @@
 {
-    "driver":"chromedriver.exe",
+    "driver":"Crawler/chromedriver.exe",
     "secret":"73d3984a7fa4fc5acca4d3c321ef1b7d",
     "token":"KZH3boCjksx7PilSgn1mW1riRdAeGiOCgA6/oPixEWWEzGrXTSURHbXF58GTBaTU5hFLr254TPMDZN+FN8u80PfkASu4cvYlqIQ5n3mZUdHtlM/CrjAMupJsfhxXzUYh2mv5RaMujWcLOCWjpZg/jAdB04t89/1O/w1cDnyilFU="
 }
