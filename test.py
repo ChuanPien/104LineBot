@@ -25,29 +25,43 @@
 # print("\n, ".join(seg_list))
 
 #------------------------------------------------------
+
 #https://www.tpisoftware.com/tpu/articleDetails/2013
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.linear_model import LogisticRegression
-import pandas as pd
+# from sklearn.feature_extraction.text import CountVectorizer
+# from sklearn.linear_model import LogisticRegression
+# import pandas as pd
 
-read = pd.read_excel("Crawler/data.xlsx").values.tolist()
-corpus = [row[0] for row in read]
-intents = [row[1] for row in read]
+# read = pd.read_excel("Crawler/data.xlsx").values.tolist()
+# corpus = [row[0] for row in read]
+# intents = [row[1] for row in read]
 
-feature_extractor = CountVectorizer(
-            analyzer="word", ngram_range=(1, 2), binary=True,
-            token_pattern=r'([a-zA-Z]+|\w)')
-X = feature_extractor.fit_transform(corpus)
+# feature_extractor = CountVectorizer(
+#             analyzer="word", ngram_range=(1, 2), binary=True,
+#             token_pattern=r'([a-zA-Z]+|\w)')
+# X = feature_extractor.fit_transform(corpus)
 
-INTENT_CLASSIFY_REGULARIZATION = "l2"
+# INTENT_CLASSIFY_REGULARIZATION = "l2"
 
-lr = LogisticRegression(penalty=INTENT_CLASSIFY_REGULARIZATION,class_weight='balanced')
-lr.fit(X, intents)
+# lr = LogisticRegression(penalty=INTENT_CLASSIFY_REGULARIZATION,class_weight='balanced')
+# lr.fit(X, intents)
 
-user_input = ['松山']
-X2 = feature_extractor.transform(user_input)
-print(lr.predict(X2))
+# user_input = ['松山']
+# X2 = feature_extractor.transform(user_input)
+# print(lr.predict(X2))
 
 # probs = lr.predict_proba(X2)[0]
 # for predict_intent, prob in sorted(zip(lr.classes_, probs), key = lambda x: x[1],reverse = True):
 #     print(predict_intent, prob)
+
+#------------------------------------------------------
+from openpyxl import Workbook, load_workbook
+
+wb = load_workbook('Crawler/data.xlsx')
+ws = wb['city']
+
+A = '東區'
+
+for row in range(1, ws.max_row):
+    produceName = ws.cell(row,1).value
+    if A in produceName:
+        print(ws.cell(row,2).value + '|' + A)
