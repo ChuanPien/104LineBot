@@ -12,7 +12,7 @@
 
 # 全模式
 # seg_list = jieba.cut("我来到北京清华大学", cut_all=True)
-# print("\nFull Mode: " + "/ ".join(seg_list))  
+# print("\nFull Mode: " + "/ ".join(seg_list))
 
 # fix = ['軟體工程師', '沒有工作經驗']
 # for i in fix:
@@ -24,9 +24,9 @@
 # seg_list = jieba.cut_for_search("小明硕士毕业于中国科学院计算所，后在日本京都大学深造")  # 搜索引擎模式
 # print("\n, ".join(seg_list))
 
-#------------------------------------------------------
+# ------------------------------------------------------
 
-#https://www.tpisoftware.com/tpu/articleDetails/2013
+# https://www.tpisoftware.com/tpu/articleDetails/2013
 # from sklearn.feature_extraction.text import CountVectorizer
 # from sklearn.linear_model import LogisticRegression
 # import pandas as pd
@@ -53,15 +53,15 @@
 # for predict_intent, prob in sorted(zip(lr.classes_, probs), key = lambda x: x[1],reverse = True):
 #     print(predict_intent, prob)
 
-#------------------------------------------------------
+# ------------------------------------------------------
 from openpyxl import Workbook, load_workbook
 
-wb = load_workbook('Crawler/data.xlsx')
-ws = wb['city']
+wb = load_workbook("Crawler/data.xlsx")
+ws = wb["city"]
 
-A = '東區'
+A = "東區"
 
 for row in range(1, ws.max_row):
-    produceName = ws.cell(row,1).value
+    produceName = ws.cell(row, 1).value
     if A in produceName:
-        print(ws.cell(row,2).value + '|' + A)
+        print(ws.cell(row, 2).value + "|" + A)

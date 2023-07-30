@@ -39,10 +39,3 @@ def config(id, name, text):
         msg = "資料儲存成功!"
     
     return msg
-
-id = 123
-name = '王大陸'
-text = '業大同'
-
-msg = config(id, name, text)
-print(msg)
