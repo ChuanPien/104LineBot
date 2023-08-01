@@ -67,12 +67,12 @@
 #         print(ws.cell(row, 2).value + "|" + A)
 
 # ------------------------------------------------------
-# import json, os
+# import json
 
-# with open('Crawler\job.json', 'r', encoding='utf8')as J:
+# with open('Crawler\city.json', 'r', encoding='utf8')as J:
 #     j = json.load(J)
 #     x=1
-#     for i in j["其他類人員"]:
+#     for i in j["西非"]:
 #         print('{"value": "option' + f'{x}' + '", "text":"' + f'{i}'+'"},')
 #         x+=1
 

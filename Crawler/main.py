@@ -54,7 +54,7 @@ WebDriverWait(driver, 100.0).until(
     )
 
 #模擬點擊[職務類別選單]
-ijob = driver.find_element(By.ID, "ijob")                          #icity資料選單/ijob資料選單
+ijob = driver.find_element(By.ID, "icity")                          #icity資料選單/ijob資料選單
 action = ActionChains(driver).click(ijob).perform()
 
 #等待網頁元素出現
@@ -64,29 +64,33 @@ WebDriverWait(driver, 100.0).until(
 
 #抓取所有職務類別並存入JSON檔
 arrows = driver.find_elements(By.CLASS_NAME, "arrow--right")                        #抓取大類別
+x = 0
 for arrow in arrows:
     i = 0
     data = []
     action = ActionChains(driver).click(arrow).perform()                            #依序打開
     l2s = driver.find_elements(By.CLASS_NAME, "category-item--level-two")
     ardowns = driver.find_elements(By.CLASS_NAME, "arrow--down")                    #抓取中類別
-    for ardown in ardowns[1:]:
-        action = ActionChains(driver).click(ardown).perform()                       #依序打開
-        l2s = driver.find_elements(By.CLASS_NAME, "category-item--level-two")       #抓取中類別
-        l3s = driver.find_elements(By.CLASS_NAME, "category-item--level-three")     #抓取小類別
-        time.sleep(0.2)                                                             #等待0.2秒
-        #依序將l3s中的文字提出並放入data陣列中
-        for l3 in l3s:
-            if l3.text != '':
-                data.append(l3.text)
-                # ws.append([l3.text,l2s[i].text])                                     #寫入excel
-        write_json({l2s[i].text: data,})                                            #呼叫寫入JSON方法
-        l3s.clear()                                                                  #清空l3s資料
-        data.clear()                                                                 #清空data資料
-        i += 1
-        arrowup = driver.find_element(By.CLASS_NAME, "arrow--up")                   #抓取打開的小類別
-        actions = ActionChains(driver).click(arrowup).perform()                     #關閉小類別
-        time.sleep(0.3)                                                             #等待0.3秒
+    for l2 in l2s:
+        print('{"value": "option' + f'{x}' + '", "text":"' + f'{l2.text}'+'"},')
+        x+=1
+    # for ardown in ardowns[1:]:
+    #     action = ActionChains(driver).click(ardown).perform()                       #依序打開
+    #     l2s = driver.find_elements(By.CLASS_NAME, "category-item--level-two")       #抓取中類別
+    #     l3s = driver.find_elements(By.CLASS_NAME, "category-item--level-three")     #抓取小類別
+    #     time.sleep(0.2)                                                             #等待0.2秒
+    #     #依序將l3s中的文字提出並放入data陣列中
+    #     for l3 in l3s:
+    #         if l3.text != '':
+    #             data.append(l3.text)
+    #             # ws.append([l3.text,l2s[i].text])                                     #寫入excel
+    #     write_json({l2s[i].text: data,})                                            #呼叫寫入JSON方法
+    #     l3s.clear()                                                                  #清空l3s資料
+    #     data.clear()                                                                 #清空data資料
+    #     i += 1
+    #     arrowup = driver.find_element(By.CLASS_NAME, "arrow--up")                   #抓取打開的小類別
+    #     actions = ActionChains(driver).click(arrowup).perform()                     #關閉小類別
+    #     time.sleep(0.3)                                                             #等待0.3秒
 
 # wb.save('data.xlsx')                                                                #excel存檔
 driver.quit()                                                                       #關閉網頁

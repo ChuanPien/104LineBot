@@ -1,60 +1,22 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>使用 JSON 数据生成下拉选项</title>
+  <title>互動小視窗</title>
+  <!-- 導入 JS 文件 -->
+  <script src="lib/job.js"></script>
 </head>
+
 <body>
+  <h2>選擇工作類別</h2>
+  <!-- 第一個下拉菜單 -->
+  <select id="selectCategory"></select>
+  <br />
+  <!-- 第二個下拉菜單 -->
   <select id="selectOptions"></select>
+  <br />
+  <!-- 顯示選擇結果的區域 -->
   <div id="selectedResult"></div>
-
-  <script>
-    function fetchJSONData() {
-      const jsonFilePath = 'http://localhost:3000/data'; // 使用本地服务器路径
-
-      fetch(jsonFilePath)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then((data) => {
-          // 使用 JSON 数据动态生成下拉选项
-          generateSelectOptions(data["學術研究類人員"]);
-        })
-        .catch((error) => console.error('Fetch Error:', error));
-    }
-
-    function generateSelectOptions(jsonData) {
-      // 获取 select 元素
-      const selectElement = document.getElementById('selectOptions');
-
-      // 清空下拉选项
-      selectElement.innerHTML = '';
-
-      // 动态生成下拉选项
-      jsonData.forEach((optionData) => {
-        const optionElement = document.createElement('option');
-        optionElement.value = optionData.value; // 设置选项的值
-        optionElement.textContent = optionData.text; // 设置选项的显示文本
-        selectElement.appendChild(optionElement);
-      });
-
-      // 添加事件监听器来捕获下拉选项的变化
-      selectElement.addEventListener('change', displaySelectedResult);
-    }
-
-    function displaySelectedResult() {
-      // 获取选中的值
-      const selectedValue = document.getElementById('selectOptions').value;
-
-      // 在页面上显示选中的结果
-      const selectedResult = document.getElementById('selectedResult');
-      selectedResult.textContent = `你选择了选项 ${selectedValue}`;
-    }
-
-    // 页面加载时调用 fetchJSONData 函数，获取并生成下拉选项
-    fetchJSONData();
-  </script>
 </body>
+
 </html>
