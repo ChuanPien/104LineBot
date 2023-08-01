@@ -68,6 +68,7 @@ for arrow in arrows:
     i = 0
     data = []
     action = ActionChains(driver).click(arrow).perform()                            #依序打開
+    l2s = driver.find_elements(By.CLASS_NAME, "category-item--level-two")
     ardowns = driver.find_elements(By.CLASS_NAME, "arrow--down")                    #抓取中類別
     for ardown in ardowns[1:]:
         action = ActionChains(driver).click(ardown).perform()                       #依序打開

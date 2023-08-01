@@ -54,14 +54,26 @@
 #     print(predict_intent, prob)
 
 # ------------------------------------------------------
-from openpyxl import Workbook, load_workbook
+# from openpyxl import Workbook, load_workbook
 
-wb = load_workbook("Crawler/data.xlsx")
-ws = wb["city"]
+# wb = load_workbook("Crawler/data.xlsx")
+# ws = wb["city"]
 
-A = "東區"
+# A = "東區"
 
-for row in range(1, ws.max_row):
-    produceName = ws.cell(row, 1).value
-    if A in produceName:
-        print(ws.cell(row, 2).value + "|" + A)
+# for row in range(1, ws.max_row):
+#     produceName = ws.cell(row, 1).value
+#     if A in produceName:
+#         print(ws.cell(row, 2).value + "|" + A)
+
+# ------------------------------------------------------
+# import json, os
+
+# with open('Crawler\job.json', 'r', encoding='utf8')as J:
+#     j = json.load(J)
+#     x=1
+#     for i in j["其他類人員"]:
+#         print('{"value": "option' + f'{x}' + '", "text":"' + f'{i}'+'"},')
+#         x+=1
+
+# ------------------------------------------------------

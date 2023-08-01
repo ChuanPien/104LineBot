@@ -1,76 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" content="width=device-width, initial-scale=1" />
-    <title>職缺/地區</title>
-<script>
-	function initializeApp(data) {  //初始化LIFF
-		var userid = data.context.userId;  //取得ID
-	}
-
-	function pushMsg(pname, pdatatime, proom) {
-		if (pname == '' || pdatatime == '' || proom == '') {  //資料檢查
-			alert('每個項目都必須輸入！');
-			return;
-		}
-		var msg = "###";  //回傳訊息字串
-		msg = msg + pname + "/";
-		msg = msg + amount + "/";
-		msg = msg + pdatatime + "/";
-		msg = msg + proom;
-		liff.sendMessages([  //推播訊息
-			{ type: 'text',
-			  text: msg
-			}
-		])
-			.then(() => {
-				liff.closeWindow();  //關閉視窗
-			});
-	}
-
-	$(document).ready(function () {
-		liff.init(function (data) {  //初始化LIFF
-			initializeApp(data);
-		});
-		
-		$('#sure').click(function (e) {  //按下確定鈕
-			pushMsg($('#name').val(), $('#datetime').val(), $('#sel_room').val());
-		});
-	});
-</script>
+  <title>使用 JSON 数据生成下拉选项</title>
 </head>
 <body>
-    <div class="row" style="margin: 10px">
-        <div class="col-12" style="margin: 10px">
-            <label>姓名</label>
-            <input type="text" id="name" class="form-control" />
-            <br />
-            <label>日期</label>
-            <input type="date" id="datetime" value="" class="form-control" />
-            <br />
-            <label>飲料數量</label>
-            <input type="number" id="txb_amount" class="form-control" />
-            <br />
-            <label>品項</label>
-            <select id="sel_drink" class="form-control">
-                <option selected>茉莉綠茶</option>
-                <option>珍珠紅茶</option>
-                <option>紅茶拿鐵</option>
-                <option>四季春茶</option>
-                <option>冬瓜檸檬</option>
-            </select>
-            <br />
-            <label>加料</label>
-            <select id="sel_drink" class="form-control">
-                <option selected>無</option>
-                <option>白玉珍珠</option>
-                <option>椰果</option>
-                <option>仙草</option>
-                <option>小芋園</option>
-            </select>
-            <br />
-            <button class="btn btn-warning btn-block" id="sure">確定</button>
-        </div>
-    </div>
+  <select id="selectOptions"></select>
+  <div id="selectedResult"></div>
+
+  <script>
+    function fetchJSONData() {
+      const jsonFilePath = 'http://localhost:3000/data'; // 使用本地服务器路径
+
+      fetch(jsonFilePath)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // 使用 JSON 数据动态生成下拉选项
+          generateSelectOptions(data["學術研究類人員"]);
+        })
+        .catch((error) => console.error('Fetch Error:', error));
+    }
+
+    function generateSelectOptions(jsonData) {
+      // 获取 select 元素
+      const selectElement = document.getElementById('selectOptions');
+
+      // 清空下拉选项
+      selectElement.innerHTML = '';
+
+      // 动态生成下拉选项
+      jsonData.forEach((optionData) => {
+        const optionElement = document.createElement('option');
+        optionElement.value = optionData.value; // 设置选项的值
+        optionElement.textContent = optionData.text; // 设置选项的显示文本
+        selectElement.appendChild(optionElement);
+      });
+
+      // 添加事件监听器来捕获下拉选项的变化
+      selectElement.addEventListener('change', displaySelectedResult);
+    }
+
+    function displaySelectedResult() {
+      // 获取选中的值
+      const selectedValue = document.getElementById('selectOptions').value;
+
+      // 在页面上显示选中的结果
+      const selectedResult = document.getElementById('selectedResult');
+      selectedResult.textContent = `你选择了选项 ${selectedValue}`;
+    }
+
+    // 页面加载时调用 fetchJSONData 函数，获取并生成下拉选项
+    fetchJSONData();
+  </script>
 </body>
 </html>
