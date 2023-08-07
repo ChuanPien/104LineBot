@@ -2,62 +2,39 @@
 <html>
 
 <head>
-  <meta charset="UTF-8" content="width=device-width, initial-scale=1" />
-  <title>職缺/地區</title>
-  <script>
-    //初始化LIFF
-    function initializeApp(data) {
-      var userid = data.context.userId; //取得ID
-    }
-
-    function pushMsg(job, city) {
-      if (job == "" || city == "") {   //資料檢查
-        alert("每個項目都必須輸入！");
-        return;
-      }
-      var msg = "###";        //回傳訊息字串
-      msg = msg + job + "/";
-      msg = msg + city + "/";
-      liff
-        .sendMessages([         //推播訊息
-          { type: "text", text: msg },
-        ])
-        .then(() => {
-          liff.closeWindow();       //關閉視窗
-        });
-    }
-
-    $(document).ready(function () {
-      liff.init(function (data) {
-        //初始化LIFF
-        initializeApp(data);
-      });
-
-      $("#sure").click(function (e) {
-        //按下確定鈕
-        pushMsg($("#job").val(), $("#city").val());
-      });
-    });
-  </script>
+    <meta charset="UTF-8">
+    <title>選擇地區/職缺</title>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src="JS/city.js"></script>
+    <script src="JS/job.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <h2>職務</h2>
-  <input type="text" id="job" />
-  <br />
-  <select id="sel_drink" class="form-control">
-    <option selected>選擇職務</option>
-    <option>A</option>
-  </select>
 
-  <h2>地區</h2>
-  <input type="text" id="city" />
-  <br />
-  <select id="sel_drink" class="form-control">
-    <option selected>選擇地區</option>
-    <option>A</option>
-  </select>
-  <br />
-  <button class="btn btn-warning btn-block" id="sure">確定</button>
+<body>
+    <form>
+        <div class="main">
+            <div class=city>
+                <h2>請選擇地區類別</h2>
+                <select id="continent-list"></select>
+                <br>
+                <p>當你選擇地區類別後</p>
+                <p>下列選單會列出屬於該地區的所有細項</p>
+                <select id="country-list"></select>
+                <select id="town-list"></select>
+                <p id="city-info-text">等待中請稍後...</p>
+            </div>
+            <div class=job>
+                <h2>請選擇職缺類別</h2>
+                <select id="job-main-list"></select>
+                <br>
+                <p>當你選擇職缺類別後</p>
+                <p>下列選單會列出屬於該類別的所有職缺</p>
+                <select id="job-list"></select>
+                <p id="job-info-text">等待中請稍後...</p>
+            </div>
+        </div>
+        <button class="btn" id="sure">確定</button>
+    </form>
 </body>
 
 </html>

@@ -1,5 +1,15 @@
 {
-  "台灣":[
+  "洲":[
+    {"value": "option0", "text":"台灣地區"},
+    {"value": "option1", "text":"大陸地區"},
+    {"value": "option2", "text":"其他亞洲"},
+    {"value": "option3", "text":"大洋洲"},
+    {"value": "option4", "text":"美加地區"},
+    {"value": "option5", "text":"中南美洲"},
+    {"value": "option6", "text":"歐洲"},
+    {"value": "option7", "text":"非洲"}
+  ],
+  "台灣地區":[
     {"value": "option0", "text":"台北市"},
     {"value": "option1", "text":"新北市"},
     {"value": "option2", "text":"宜蘭縣"},
@@ -21,7 +31,7 @@
     {"value": "option18", "text":"金門縣"},
     {"value": "option19", "text":"連江縣"}
   ],
-  "中國":[
+  "大陸地區":[
     {"value": "option20", "text":"北京市"},
     {"value": "option21", "text":"天津市"},
     {"value": "option22", "text":"上海市"},
@@ -56,7 +66,7 @@
     {"value": "option51", "text":"香港特別行政區"},
     {"value": "option52", "text":"澳門特別行政區"}
   ],
-  "亞洲":[
+  "其他亞洲":[
     {"value": "option53", "text":"東北亞"},
     {"value": "option54", "text":"東南亞"},
     {"value": "option55", "text":"亞洲其他"}
@@ -65,13 +75,13 @@
     {"value": "option56", "text":"紐澳"},
     {"value": "option57", "text":"大洋洲其他"}
   ],
-  "美/加":[
+  "美加地區":[
     {"value": "option58", "text":"加拿大"},
     {"value": "option59", "text":"美東地區"},
     {"value": "option60", "text":"美西地區"},
     {"value": "option61", "text":"美中地區"}
   ],
-  "中南美":[
+  "中南美洲":[
     {"value": "option62", "text":"中美洲"},
     {"value": "option63", "text":"南美洲"}
   ],
