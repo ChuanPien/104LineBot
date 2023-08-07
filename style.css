@@ -1,4 +1,4 @@
-.main{
+body{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,21 +6,14 @@
 }
 
 .city {
-  flex: 1;
   background-color: chocolate;
 }
 
 .job {
-  flex: 1;
   background-color: darkgreen;
 }
 
 select {
   margin-bottom: 10px;
   margin-top: 10px;
-}
-
-.btn{
-  display: flex;
-  margin: 0 auto;
 }
