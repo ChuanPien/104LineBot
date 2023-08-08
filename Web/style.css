@@ -39,7 +39,7 @@ select {
 
 input {
   background: none;
-  width: 80%;
+  width: 70%;
   font-size: 16px;
 }
 
@@ -48,6 +48,7 @@ input {
   padding: 6px 12px;
   margin-top: 5px;
   margin-bottom: 5px;
+  margin-right: 20px;
   font-size: 18px;
   font-weight: normal;
   line-height: 1.5;
@@ -57,6 +58,10 @@ input {
   color: #fff;
   background-color: #337ab7;
   transition: .5s;
+}
+
+.btn-clear{
+  background-color: #b73333;
 }
 
 .btn:hover {

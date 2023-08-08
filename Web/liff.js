@@ -1,15 +1,14 @@
 function pushMsg(continent, country, town, jobs, job, pay, exp) {
-    // if (continent == '' || country == '' || town == '' || jobs == '' || job == '') {  //資料檢查
-    //     alert('每個項目都必須輸入！');
-    //     return;
+    // if (continent == '') {  //資料檢查
+    //     continent = '#';
     // }
     var msg = "#,";  
     msg += continent + ",";
     msg += country + ",";
     msg += town + ",";
     msg += jobs + ",";
-    msg += job;
-    msg += pay;
+    msg += job + ",";
+    msg += pay + ",";
     msg += exp;
 
     //回傳訊息字串
@@ -39,7 +38,7 @@ $(document).ready(function () {
         //     var context = liff.getContext();
         //     console.log(context);
 
-            $('#btn').click(function () {  //按下確定鈕
+            $('#btn-send').click(function () {  //按下確定鈕
                 pushMsg(
                     $("#continent-list :selected").text(),
                     $("#country-list :selected").text(),
