@@ -35,21 +35,22 @@ def callback():
         abort(400)
     return 'OK'
 
-@app.route("/hello")
-def hello():
-    return "Hello, World!"
-
 #接收Line客戶端訊息
 @handler.add(MessageEvent, message=TextMessage)                                     #如果訊息是文字
 def event(event):
-    id = event.source.user_id                                                       #抓取使用者id
-    profile = line_bot_api.get_profile(id)                                          #抓取使用者資料
-    msg = config(id, profile.display_name, event.message.text)                      #呼叫函式，並取得msg回傳
-    log(id, profile.display_name, event.message.text, msg)                          #紀錄log中
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=msg))         #回傳給使用者
+    msg = event.message.text
+    remsg = ""
+    if msg.startswith("###"):
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="收到設定檔"))    #回傳給使用者
+        remsg = "收到設定檔"
+    else:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=msg))             #回傳給使用者
+        remsg = msg
+    id = event.source.user_id                                                               #抓取使用者id
+    profile = line_bot_api.get_profile(id)                                                  #抓取使用者資料
+    # msg = config(id, profile.display_name, event.message.text)                              #呼叫函式，並取得msg回傳
+    log(id, profile.display_name, event.message.text, remsg)                                  #紀錄log中
 
-    # if event.message.text.startwith("###"):
-    #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=msg))         #回傳給使用者
 
 if __name__ == "__main__":
     app.run()
