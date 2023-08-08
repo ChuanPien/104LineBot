@@ -3,12 +3,12 @@ function pushMsg(continent, country, town, jobs, job) {
     //     alert('每個項目都必須輸入！');
     //     return;
     // }
-    var msg = [];  
-    msg.push(continent);
-    msg.push(country);
-    msg.push(town);
-    msg.push(jobs);
-    msg.push(job);
+    var msg = "#/";  
+    msg += continent + "/";
+    msg += country + "/";
+    msg += town + "/";
+    msg += jobs + "/";
+    msg += job;
 
     //回傳訊息字串
     liff.sendMessages([

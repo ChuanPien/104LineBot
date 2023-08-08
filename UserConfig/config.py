@@ -26,8 +26,10 @@ def write_json(id, name, new_data):
         f.write(json.dumps(file_data, ensure_ascii = False, indent = 4))        #寫入                                                   
         f.close()                                                               #關閉
 
-def config(id, name, data):
+def config(id, name, msg):
     try:
+        data = msg.split(str='/')
+        data.remove("#")
         write_json(id, name, data)
     except:
         msg = "發生錯誤!"
