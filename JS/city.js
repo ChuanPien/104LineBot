@@ -21,6 +21,7 @@ $(document).ready(function () {
             }
             //將cinner值傳給html中id為country-list元素
             $("#country-list").html(cinner);
+            $("#country-list").change();
             $("#town-list").change();
         });
 
