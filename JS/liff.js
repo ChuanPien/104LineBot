@@ -10,8 +10,9 @@ function pushMsg(continent, country, town, jobs, job) {
     msg += jobs + "/";
     msg += job;
     liff.sendMessages([  //推播訊息
-        { type: 'text',
-          text: msg
+        {
+            type: 'text',
+            text: msg
         }
     ])
         .then(() => {
@@ -20,13 +21,14 @@ function pushMsg(continent, country, town, jobs, job) {
 }
 
 var liffID = '2000268560-PDBzXMGm'
-$(document).ready(function () {
-    liff.init(function (data) {  //初始化LIFF
-        var userid = data.context.userid
-        // var context = liff.getContext();
-        console.log(userid);
-    });
-    
+liff.init({
+    liffId: liffID
+}).then(function () {
+    console.log('LIFF init');
+    var userid = data.context.userid
+    // var context = liff.getContext();
+    console.log(userid);
+
     $('#btn').click(function () {  //按下確定鈕
         pushMsg($("#continent-list :selected").text(), $("#country-list :selected").text(), $("#town-list :selected").text(), $("#job-main-list :selected").text(), $("#job-list :selected").text());
     });
