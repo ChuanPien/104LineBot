@@ -2,6 +2,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-repeat: repeat-y;
   background-image: url('https://raw.githubusercontent.com/ChuanPien/LineBot_Updating/main/lib/bg.jpg');
 }
 
