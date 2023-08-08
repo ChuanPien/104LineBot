@@ -48,7 +48,8 @@ def event(event):
     log(id, profile.display_name, event.message.text, msg)                          #紀錄log中
     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=msg))         #回傳給使用者
 
-    # if event.message.text
+    # if event.message.text.startwith("###"):
+    #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=msg))         #回傳給使用者
 
 if __name__ == "__main__":
     app.run()
