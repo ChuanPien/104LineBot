@@ -28,9 +28,10 @@ def write_json(id, name, new_data):
 
 def config(id, name, msg):
     try:
-        data = msg.split(str='/')
+        data = msg.split(',')
         data.remove("#")
-        write_json(id, name, data)
+        print(data)
+        # write_json(id, name, data)
     except:
         msg = "發生錯誤!"
         raise

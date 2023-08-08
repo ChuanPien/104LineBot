@@ -3,11 +3,11 @@ function pushMsg(continent, country, town, jobs, job) {
     //     alert('每個項目都必須輸入！');
     //     return;
     // }
-    var msg = "#/";  
-    msg += continent + "/";
-    msg += country + "/";
-    msg += town + "/";
-    msg += jobs + "/";
+    var msg = "#,";  
+    msg += continent + ",";
+    msg += country + ",";
+    msg += town + ",";
+    msg += jobs + ",";
     msg += job;
 
     //回傳訊息字串
