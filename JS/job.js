@@ -21,6 +21,7 @@ $(document).ready(function () {
             }
             //將Sinner值傳給html中id為job-list元素
             $("#job-list").html(Sinner);
+            $("#job-list").change();
         });
 
         $("#job-list").change(function () {
