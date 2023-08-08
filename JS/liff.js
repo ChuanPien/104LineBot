@@ -2,16 +2,17 @@ function initializeApp(data) {  //初始化LIFF
     var userid = data.context.userId;  //取得ID
 }
 
-function pushMsg(pname, pdatatime, proom) {
-    if (pname == '' || pdatatime == '' || proom == '') {  //資料檢查
+function pushMsg(continent, country, town, jobs, job) {
+    if (continent == '' || country == '' || town == '' || jobs == '' || job == '') {  //資料檢查
         alert('每個項目都必須輸入！');
         return;
     }
     var msg = "###";  //回傳訊息字串
-    msg = msg + pname + "/";
-    msg = msg + amount + "/";
-    msg = msg + pdatatime + "/";
-    msg = msg + proom;
+    msg = msg + continent + "/";
+    msg = msg + country + "/";
+    msg = msg + town + "/";
+    msg = msg + jobs + "/";
+    msg = msg + job;
     liff.sendMessages([  //推播訊息
         { type: 'text',
           text: msg
@@ -28,6 +29,6 @@ $(document).ready(function () {
     });
     
     $('#sure').click(function (e) {  //按下確定鈕
-        pushMsg($('#name').val(), $('#datetime').val(), $('#sel_room').val());
+        pushMsg($("#continent-list :selected").text(), $("#country-list :selected").text(), $("#town-list :selected").text(), $("#job-main-list :selected").text(), $("#job-list :selected").text());
     });
 });
