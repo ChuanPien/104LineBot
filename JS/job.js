@@ -19,9 +19,8 @@ $(document).ready(function () {
             for (var i = 0; i < jobs.length; i++) {
                 Sinner = Sinner + '<option value=' + i + '>' + jobs[i].text + '</option>';
             }
-            //將Sinner值傳給html中id為job-list元素
-            $("#job-list").html(Sinner);
-            $("#job-list").change();
+            $("#job-list").html(Sinner);        //將Sinner值傳給html中id為job-list元素
+            $("#job-list").change();            //當[類別]更改時，Info也會及時更新
         });
 
         $("#job-list").change(function () {

@@ -19,10 +19,9 @@ $(document).ready(function () {
             for (var i = 0; i < country.length; i++) {
                 cinner = cinner + '<option value=' + i + '>' + country[i].text + '</option>';
             }
-            //將cinner值傳給html中id為country-list元素
-            $("#country-list").html(cinner);
-            $("#country-list").change();
-            $("#town-list").change();
+            $("#country-list").html(cinner);    //將cinner值傳給html中id為country-list元素
+            $("#country-list").change();        //當[洲]更改時，國家也會及時更新
+            $("#city-Info-list").change();      //當[洲]更改時，Info也會及時更新
         });
 
         $("#country-list").change(function () {
@@ -33,9 +32,8 @@ $(document).ready(function () {
             for (var i = 0; i < town.length; i++) {
                 tinner = tinner + '<option value=' + i + '>' + town[i].text + '</option>';
             }
-            //將tinner值傳給html中id為town-list元素
-            $("#town-list").html(tinner);
-            $("#town-list").change();
+            $("#town-list").html(tinner);        //將tinner值傳給html中id為town-list元素
+            $("#town-list").change();            //當[國家]更改時，Info也會及時更新
         });
 
         $("#town-list").change(function () {
