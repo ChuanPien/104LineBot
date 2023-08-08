@@ -1,6 +1,6 @@
 $(document).ready(function () {
     //抓取json檔案
-    $.getJSON("https://ee5b-36-230-186-114.ngrok-free.app/city", function (data) {
+    $.getJSON("http://localhost:3000/city", function (data) {
 
         var continent = data['洲'];
         var inner = "";     //宣告一個空的值
