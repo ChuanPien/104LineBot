@@ -2,7 +2,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('https://github.com/ChuanPien/LineBot_Updating/blob/main/lib/bg.jpg');
+  background-image: url('https://raw.githubusercontent.com/ChuanPien/LineBot_Updating/main/lib/bg.jpg');
 }
 
 .main {
