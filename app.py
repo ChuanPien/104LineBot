@@ -36,20 +36,20 @@ def callback():
     return 'OK'
 
 #接收Line客戶端訊息
-@handler.add(MessageEvent, message=TextMessage)                                     #如果訊息是文字
+@handler.add(MessageEvent, message=TextMessage)                                            #如果訊息是文字
 def event(event):
-    msg = event.message.text
-    remsg = ""
-    if msg.startswith("###"):
+    msg = event.message.text                                                                #將收到的文字放入msg中
+    remsg = ""                                                                              #宣告空字串
+    if msg.startswith("###"):                                                               #如果開頭是###
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text="收到設定檔"))    #回傳給使用者
-        remsg = "收到設定檔"
+        remsg = "收到設定檔"                                                                #將回傳的文字放入remsg中
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=msg))             #回傳給使用者
-        remsg = msg
+        remsg = msg                                                                         #將回傳的文字放入remsg中
     id = event.source.user_id                                                               #抓取使用者id
     profile = line_bot_api.get_profile(id)                                                  #抓取使用者資料
-    # msg = config(id, profile.display_name, event.message.text)                              #呼叫函式，並取得msg回傳
-    log(id, profile.display_name, event.message.text, remsg)                                  #紀錄log中
+    # msg = config(id, profile.display_name, event.message.text)                            #呼叫函式，並取得msg回傳
+    log(id, profile.display_name, event.message.text, remsg)                                #紀錄log中
 
 
 if __name__ == "__main__":
