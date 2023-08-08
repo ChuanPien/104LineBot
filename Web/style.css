@@ -2,9 +2,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: url('https://pic.huitu.com/res/20220914/1655016_20220914100817474060_1.jpg');
+  background-image: url('https://github.com/ChuanPien/LineBot_Updating/blob/main/lib/bg.jpg');
 }
 
 .main {
