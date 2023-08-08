@@ -2,7 +2,7 @@
 
 $(document).ready(function () {
     //抓取json檔案
-    $.getJSON("https://github.com/ChuanPien/LineBot_Updating/blob/main/Crawler/job.json", function (data) {
+    $.getJSON("https://raw.githubusercontent.com/ChuanPien/LineBot_Updating/main/Crawler/job.json", function (data) {
 
         var job_mains = data['工作'];
         var inner = "";     //宣告一個空的值
