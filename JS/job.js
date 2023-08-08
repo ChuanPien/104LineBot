@@ -1,5 +1,3 @@
-// import data from './Crawler/job.json' assert { type: 'JSON' };
-
 $(document).ready(function () {
     //抓取json檔案
     $.getJSON("https://raw.githubusercontent.com/ChuanPien/LineBot_Updating/main/Crawler/job.json", function (data) {
@@ -27,8 +25,8 @@ $(document).ready(function () {
 
         $("#job-list").change(function () {
             // 設定頁面下方總結資訊文字，"selected"抓取目前所選的值
-            Info1 = '類別 : ' + $("#job-main-list :selected").text() + ' | ' + $("#job-main-list :selected").val() + '<br>'
-            Info2 = '職缺 : ' + $("#job-list :selected").text() + ' | ' + $("#job-list :selected").val()
+            var Info1 = '類別 : ' + $("#job-main-list :selected").text() + ' | ' + $("#job-main-list :selected").val() + '<br>'
+            var Info2 = '職缺 : ' + $("#job-list :selected").text() + ' | ' + $("#job-list :selected").val()
             //將(Info1 + Info2)值傳給html中id為info-text元素
             $('#job-info-text').html(Info1 + Info2)
         });

@@ -1,5 +1,3 @@
-// import data from './Crawler/city.json' assert { type: 'JSON' };
-
 $(document).ready(function () {
     //抓取json檔案
     $.getJSON("https://raw.githubusercontent.com/ChuanPien/LineBot_Updating/main/Crawler/city.json", function (data) {
@@ -39,9 +37,9 @@ $(document).ready(function () {
 
         $("#town-list").change(function () {
             // 設定頁面下方總結資訊文字，"selected"抓取目前所選的值
-            Info1 = '洲 : ' + $("#continent-list :selected").text() + ' | ' + $("#continent-list :selected").val() + '<br>'
-            Info2 = '國家 : ' + $("#country-list :selected").text() + ' | ' + $("#country-list :selected").val() + '<br>'
-            Info3 = '地區 : ' + $("#town-list :selected").text() + ' | ' + $("#town-list :selected").val()
+            var Info1 = '洲 : ' + $("#continent-list :selected").text() + ' | ' + $("#continent-list :selected").val() + '<br>'
+            var Info2 = '國家 : ' + $("#country-list :selected").text() + ' | ' + $("#country-list :selected").val() + '<br>'
+            var Info3 = '地區 : ' + $("#town-list :selected").text() + ' | ' + $("#town-list :selected").val()
             //將(Info1 + Info2)值傳給html中id為info-text元素
             $('#city-info-text').html(Info1 + Info2 + Info3)
         });
