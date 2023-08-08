@@ -1,7 +1,3 @@
-function initializeApp(data) {  //初始化LIFF
-    var userid = data.context.userId;  //取得ID
-}
-
 function pushMsg(continent, country, town, jobs, job) {
     if (continent == '' || country == '' || town == '' || jobs == '' || job == '') {  //資料檢查
         alert('每個項目都必須輸入！');
@@ -23,9 +19,12 @@ function pushMsg(continent, country, town, jobs, job) {
         });
 }
 
+var liffID = '2000268560-PDBzXMGm'
 $(document).ready(function () {
     liff.init(function (data) {  //初始化LIFF
-        initializeApp(data);
+        var userid = data.context.userid
+        // var context = liff.getContext();
+        console.log(userid);
     });
     
     $('#btn').click(function () {  //按下確定鈕
