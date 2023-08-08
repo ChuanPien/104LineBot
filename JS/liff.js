@@ -17,7 +17,7 @@ function pushMsg(continent, country, town, jobs, job) {
         }
     ])
         .then(() => {
-            liff.closeWindos()
+            liff.closeWindow();
         })
         .catch((err) => {
             console.log('error', err);
