@@ -17,7 +17,7 @@ function pushMsg(continent, country, town, jobs, job) {
         }
     ])
         .then(() => {
-            console.log('message sent');
+            console.log(msg);
         })
         .catch((err) => {
             console.log('error', err);
