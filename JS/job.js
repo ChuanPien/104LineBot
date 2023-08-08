@@ -1,6 +1,8 @@
+import data from './Crawler/job.json' assert { type: 'JSON' };
+
 $(document).ready(function () {
     //抓取json檔案
-    $.getJSON("http://localhost:3000/job", function (data) {
+    // $.getJSON("http://localhost:3000/job", function (data) {
 
         var job_mains = data['工作'];
         var inner = "";     //宣告一個空的值
@@ -34,5 +36,5 @@ $(document).ready(function () {
         //呼叫function
         $("#job-main-list").change();       
         $("#job-list").change();
-    });
+    // });
 });

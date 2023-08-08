@@ -1,6 +1,8 @@
+import data from './Crawler/city.json' assert { type: 'JSON' };
+
 $(document).ready(function () {
     //抓取json檔案
-    $.getJSON("http://localhost:3000/city", function (data) {
+    // $.getJSON("http://localhost:3000/city", function (data) {
 
         var continent = data['洲'];
         var inner = "";     //宣告一個空的值
@@ -48,5 +50,5 @@ $(document).ready(function () {
         $("#continent-list").change();
         $("#country-list").change();
         $("#town-list").change();
-    });
+    // });
 });
