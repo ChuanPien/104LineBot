@@ -14,26 +14,21 @@
 
 <body>
     <div class="main">
-        <div class=city>
-            <h2>請選擇地區類別</h2>
-            <select id="continent-list"></select>
-            <br>
-            <p>當你選擇地區類別後</p>
-            <p>下列選單會列出屬於該地區的所有細項</p>
-            <select id="country-list"></select>
-            <select id="town-list"></select>
-            <p id="city-info-text">等待中請稍後...</p>
-        </div>
-        <div class=job>
-            <h2>請選擇職缺類別</h2>
-            <select id="job-main-list"></select>
-            <br>
-            <p>當你選擇職缺類別後</p>
-            <p>下列選單會列出屬於該類別的所有職缺</p>
-            <select id="job-list"></select>
-            <p id="job-info-text">等待中請稍後...</p>
-        </div>
-        <button class="btn" id="btn">確定!</button>
+        <h2>請選擇地區類別</h2>
+        <a>國家/洲<select id="continent-list"></select>縣市<select id="country-list"></select></a>
+        <p>區<select id="town-list"></select></p>
+        <!-- <p id="city-info-text">等待中請稍後...</p> -->
+        <h2>請選擇職缺類別</h2>
+        <p>職務類別<select id="job-main-list"></select></p>
+        <p>職務細項<select id="job-list"></select></p>
+        <br>
+        <!-- <p id="job-info-text">等待中請稍後...</p> -->
+        <h3>請問您希望的薪資(元)</h3>
+        <input id="pay">
+        <h3>請問您工作經歷(年)</h3>
+        <input id="exp">
+        <br>
+        <button class="btn" id="btn">送出!</button>
     </div>
 </body>
 
