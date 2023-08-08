@@ -19,17 +19,16 @@
 //             liff.closeWindow();  //關閉視窗
 //         });
 // }
-
 var liffID = '2000268560-PDBzXMGm'
-liff.init({
-    liffId: liffID
-}).then(function () {
-    console.log('LIFF init');
-    var userid = data.context.userid
-    // var context = liff.getContext();
-    console.log(userid);
+$(document).ready(function () {
+    liff.init({
+        liffId: liffID
+    }).then(function (data) {  //初始化LIFF
+        console.log("LIFF Start")
+        initializeApp(data);
 
-    // $('#btn').click(function () {  //按下確定鈕
-    //     pushMsg($("#continent-list :selected").text(), $("#country-list :selected").text(), $("#town-list :selected").text(), $("#job-main-list :selected").text(), $("#job-list :selected").text());
-    // });
+        // $('#btn').click(function () {  //按下確定鈕
+        //     pushMsg($("#continent-list :selected").text(), $("#country-list :selected").text(), $("#town-list :selected").text(), $("#job-main-list :selected").text(), $("#job-list :selected").text());
+        // });
+    });
 });
