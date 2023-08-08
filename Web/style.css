@@ -4,7 +4,7 @@ body {
   justify-content: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url('https://images.pexels.com/photos/709552/pexels-photo-709552.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+  background-image: url('https://pic.huitu.com/res/20220914/1655016_20220914100817474060_1.jpg');
 }
 
 .main {
@@ -21,20 +21,15 @@ h2 {
 }
 
 h3 {
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-a {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 p {
   margin-top: 0px;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 select {
