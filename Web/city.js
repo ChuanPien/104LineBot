@@ -1,6 +1,6 @@
 $(document).ready(function () {
     //抓取json檔案
-    $.getJSON("https://raw.githubusercontent.com/ChuanPien/LineBot_Updating/main/Crawler/city.json", function (data) {
+    $.getJSON("https://raw.githubusercontent.com/ChuanPien/104LineBot/main/Crawler/city.json", function (data) {
 
         var continent = data['洲'];
         var inner = '<option value="#">#</option>';         //宣告一個空的值
@@ -54,7 +54,5 @@ $(document).ready(function () {
 
         //呼叫function
         $("#continent-list").change();
-        $("#country-list").change();
-        // $("#town-list").change();
     });
 });

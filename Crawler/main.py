@@ -10,12 +10,12 @@ from openpyxl import Workbook, load_workbook
 import time, json, os
 
 #讀取設定檔
-with open('UserConfig/config.json', 'r', encoding='utf8')as J:
+with open('./config.json', 'r', encoding='utf8')as J:
     j = json.load(J)
 
 #寫入JSON
 def write_json(new_data):                 
-    file = 'Crawler/city1.json'                                      #city.json地區資料/job.json工作資料
+    file = 'Crawler/city.json'                                      #city.json地區資料/job.json工作資料
     if not os.path.isfile(file):
         with open(file, "w") as f:
             json.dump([], f)
@@ -28,12 +28,12 @@ def write_json(new_data):
         f.write(json.dumps(file_data, ensure_ascii = False, indent = 2))        #寫入                                                   
         f.close()                                                               #關閉
 
-'''存入excel才需啟用(9、80、89行也是)
-# wb = Workbook()                           #建立空白excel，最後存檔時才命名
-wb = load_workbook('data.xlsx')             #開啟excel
-wb.create_sheet("job")                      #建立工作表
-ws = wb['job']                              #選擇工作表
-'''
+# 存入excel才需啟用(9、80、89行也是)
+# wb = Workbook()                             #建立空白excel，最後存檔時才命名
+# wb = load_workbook('data.xlsx')             #開啟excel
+# wb.create_sheet("job")                      #建立工作表
+# ws = wb['job']                              #選擇工作表
+
 
 #設定Chrome參數
 def setup():

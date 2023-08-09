@@ -77,3 +77,44 @@
 #         x+=1
 
 # ------------------------------------------------------
+
+# import pymysql
+# 連線資料庫
+# db_settings = {
+#     'host' : "192.168.1.60",
+#     'user' : "ChuanPien",
+#     'passwd' : "",
+#     'database' : "LineBot",
+#     'port' : 3306
+# }
+
+# try:
+    # 建立Connection物件
+    # conn = pymysql.connect(**db_settings)
+
+    # 建立Cursor物件
+    # with conn.cursor() as cursor:
+        # 新增SQL資料
+        # data = "INSERT INTO user (id, name, job_A, job_B, loc_A, loc_B, loc_C, pay, exp) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        # cursor.execute(data, ("U445009dc87d992834e15252c9e637b6b", "李慈欣", "軟體/工程類人員", "iOS工程師", "台灣地區", "台中市", "台中市西屯區", "1500~35000", "0"))
+        
+        # 抓取SQL資料
+        # command = "SELECT * FROM User WHERE id = %s"
+        # cursor.execute(command, ("U445009dc87d992834e15252c9e637b6b",))
+        # result = cursor.fetchall()  #取得所有資料
+        # print(result)
+
+        # 修改SQL資料
+        # command = "UPDATE User SET name = %s WHERE id = %s"
+        # cursor.execute(command, ("ChuanPien", "U445009dc87d992834e15252c9e637b6b"))
+        
+        # 刪除SQL資料
+        # command = "DELETE FROM User WHERE id = %s"
+
+        # conn.commit()   #儲存變更
+
+# except Exception as ex:
+#     print(ex)
+
+# ------------------------------------------------------
+

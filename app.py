@@ -13,18 +13,18 @@ from linebot.models import (
 )
 from flask import Flask, request, abort
 from logs.log import log
-from UserConfig.config import config
+from DB import db
 import json
 
-#讀取設定檔
-with open('UserConfig/config.json', 'r', encoding='utf8')as J:
+# 讀取設定檔
+with open('config.json', 'r', encoding='utf8')as J:
     j = json.load(J)
 
 app = Flask(__name__)
 line_bot_api = LineBotApi(j['token'])
 handler = WebhookHandler(j['secret'])
 
-#基底碼
+# 基底碼
 @app.route("/", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']      # 加入回傳的 headers
@@ -36,14 +36,14 @@ def callback():
     return 'OK'
 
 #接收Line客戶端訊息
-@handler.add(MessageEvent, message=TextMessage)                                            #如果訊息是文字
+@handler.add(MessageEvent, message=TextMessage)                                             #如果訊息是文字
 def event(event):
     msg = event.message.text                                                                #將收到的文字放入msg中
     remsg = ""                                                                              #宣告空字串
     id = event.source.user_id                                                               #抓取使用者id
     profile = line_bot_api.get_profile(id)                                                  #抓取使用者資料
-    if msg.startswith("#,"):                                                                #如果開頭是#/
-        msg = config(id, profile.display_name, msg)                                         #呼叫函式，並取得msg回傳
+    if msg.startswith("##,"):                                                               #如果開頭是##,
+        msg = db.main(id, profile.display_name, msg)                                        #呼叫函式，並取得msg回傳
         remsg = msg                                                                         #將回傳的文字放入remsg中
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text = remsg))         #回傳給使用者
     else:
