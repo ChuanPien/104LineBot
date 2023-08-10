@@ -47,20 +47,27 @@ def message(event):
         remsg = db.main(id, name, msg)  # 呼叫函式，並取得remsg回傳
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=remsg))
     elif msg == "#主選單":
-        remsg = ButtonsTemplate(
-            thumbnail_image_url=bg,
-            title="主選單",
-            text="請選擇功能",
-            actions=[
-                URIAction(label="資料填寫表", uri="https://liff.line.me/2000268560-PDBzXMGm"),
-                PostbackTemplateAction(label="更改是否進行爬蟲", data="#crawler")
-            ],
-        )
-        line_bot_api.reply_message(
-            event.reply_token,
-            TemplateSendMessage(alt_text="Buttons template", template=remsg),
-        )
-        remsg = "成功送出"
+        try:
+            #圖文選單
+            remsg = ButtonsTemplate(
+                thumbnail_image_url=bg,
+                title="主選單",
+                text="請選擇功能",
+                actions=[
+                    URIAction(label="資料填寫表", uri="https://liff.line.me/2000268560-PDBzXMGm"),
+                    PostbackTemplateAction(label="更改爬蟲通知", data="#crawler",text="更改爬蟲通知"),
+                    PostbackTemplateAction(label="刪除資料", data="#del",text="刪除資料")
+                ],
+            )
+        except:
+            remsg = "發生錯誤"
+        else:
+            #先回覆圖文選單，再將回復狀態簡化，以便於記錄到log
+            line_bot_api.reply_message(
+                event.reply_token,
+                TemplateSendMessage(alt_text="Buttons template", template=remsg),
+            )
+            remsg = "成功送出"
 
     db.log_db(id, name, msg, remsg)  # 呼叫log函式
 
@@ -70,26 +77,56 @@ def event(event):
     data = event.postback.data  # 將收到的資料放入data中
     id = event.source.user_id  # 抓取使用者id
     name = line_bot_api.get_profile(id).display_name # 抓取使用者資料
+    #如果資料是#crawler_yes，呼叫更改通知函式
     if data == "#crawler_yes":
         remsg = db.crawler_db(id, 'yes')
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=remsg))
+    #如果資料是#crawler_no，呼叫更改通知函式
     elif data == "#crawler_no":
         remsg = db.crawler_db(id, 'no')
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=remsg))
-    elif data == "#crawler":
+    #如果資料是#delete，再回傳一次圖文選單進行二次確認
+    elif data == "#delete":
         try:
+            #圖文選單
             remsg = ButtonsTemplate(
                 thumbnail_image_url=bg,
-                title="爬蟲通知",
-                text="請選擇功能",
+                title="資料刪除",
+                text="是否確定要刪除資料?",
                 actions=[
-                    PostbackTemplateAction(label="允許", data="#crawler_yes"),
-                    PostbackTemplateAction(label="不允許", data="#crawler_no"),
+                    PostbackTemplateAction(label="確定", data="#del", text="確定"),
+                    PostbackTemplateAction(label="取消", data="#cen", text="取消"),
                 ],
             )
         except:
             remsg = "發生錯誤"
         else:
+            #先回覆圖文選單，再將回復狀態簡化，以便於記錄到log
+            line_bot_api.reply_message(
+                event.reply_token,
+                TemplateSendMessage(alt_text="Buttons template", template=remsg),
+            )
+            remsg = "確認刪除"
+    #如果資料是#del，呼叫刪除函式
+    elif data == "#del":
+        remsg = db.delete_db(id)
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=remsg))
+    elif data == "#crawler":
+        try:
+            #圖文選單
+            remsg = ButtonsTemplate(
+                thumbnail_image_url=bg,
+                title="爬蟲通知",
+                text="請選擇功能",
+                actions=[
+                    PostbackTemplateAction(label="允許", data="#crawler_yes",text="允許"),
+                    PostbackTemplateAction(label="不允許", data="#crawler_no",text="不允許"),
+                ],
+            )
+        except:
+            remsg = "發生錯誤"
+        else:
+            #先回覆圖文選單，再將回復狀態簡化，以便於記錄到log
             line_bot_api.reply_message(
                 event.reply_token,
                 TemplateSendMessage(alt_text="Buttons template", template=remsg),

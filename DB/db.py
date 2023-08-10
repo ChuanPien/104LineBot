@@ -35,8 +35,13 @@ def select_db(id):
 
 # 刪除SQL資料
 def delete_db(id):
-    command = f"""DELETE FROM User WHERE id = '{id}'"""
-    con.execute(command)
+    try:
+        command = f"""DELETE FROM User WHERE id = '{id}'"""
+        con.execute(command)
+    except:
+        return('發生錯誤')
+    else:
+        return('刪除成功')
 
 # 紀錄log
 def log_db(id, name, msg, remsg):

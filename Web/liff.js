@@ -1,4 +1,4 @@
-function pushMsg(continent, country, town, jobs, job, pay, exp) {
+function pushMsg(continent, country, town, jobs, job, pay, exp, crawler) {
     //如果是空的就放入"#"
     if (pay == "") {
         pay = '#';
@@ -6,7 +6,11 @@ function pushMsg(continent, country, town, jobs, job, pay, exp) {
     if (exp == "") {
         exp = '#';
     }
-
+    if (crawler == 'on'){
+        crawler = 'yes'
+    }else{
+        crawler = 'no'
+    }
     //將所有字串加在一起並加上逗號便於之後分割
     var msg = "##,";  
     msg += continent + ",";
@@ -15,8 +19,9 @@ function pushMsg(continent, country, town, jobs, job, pay, exp) {
     msg += jobs + ",";
     msg += job + ",";
     msg += pay + ",";
-    msg += exp;
-    
+    msg += exp + ",";
+    msg += crawler;
+
     //回傳訊息字串
     liff.sendMessages([
         {
@@ -47,8 +52,6 @@ $(document).ready(function () {
             var context = liff.getContext();
 
             $('#btn-send').click(function () {  //按下確定鈕
-                var pay = document.getElementById('pay').value;
-                var exp = document.getElementById('exp').value;
                 //抓取全部資料
                 pushMsg(
                     $("#continent-list :selected").text(),
@@ -56,8 +59,9 @@ $(document).ready(function () {
                     $("#town-list :selected").text(),
                     $("#job-main-list :selected").text(),
                     $("#job-list :selected").text(),
-                    pay,
-                    exp
+                    $("#pay").val(),
+                    $("#exp").val(),
+                    $('#crawler:checked').val()
                 );
             });
         }
