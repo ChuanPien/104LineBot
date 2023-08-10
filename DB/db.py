@@ -12,8 +12,8 @@ con = db.cursor()
 
 # 新增SQL資料
 def insert_db(id, name, data):
-    commend = f"""INSERT INTO user (id, name, job_A, job_B, loc_A, loc_B, loc_C, pay, exp) 
-        VALUES ('{id}', '{name}', '{data[0]}', '{data[1]}', '{data[2]}', '{data[3]}', '{data[4]}', '{data[5]}', '{data[6]}')"""
+    commend = f"""INSERT INTO user (id, name, job_A, job_B, loc_A, loc_B, loc_C, pay, exp, crawler) 
+        VALUES ('{id}', '{name}', '{data[0]}', '{data[1]}', '{data[2]}', '{data[3]}', '{data[4]}', '{data[5]}', '{data[6]}', '{data[7]}')"""
     con.execute(commend)
 
 # 修改SQL資料
@@ -46,6 +46,17 @@ def log_db(id, name, msg, remsg):
     con.execute(commend)
     db.commit()
     db.close()
+
+def crawler_db(id, msg):
+    try:
+        command = f"""UPDATE user SET crawler = '{msg}' WHERE id = '{id}'"""
+        con.execute(command)
+        db.commit()
+        db.close()
+    except:
+        return('發生錯誤')
+    else:
+        return('成功更改')
 
 def main(id, name, msg):
     try:
