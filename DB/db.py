@@ -1,5 +1,5 @@
 # 載入 pymysql 及 json 函式庫
-import pymysql, json
+import pymysql, json, datetime
 
 # 讀取json資料
 with open('./config.json', 'r', encoding='utf8')as J:
@@ -19,7 +19,7 @@ def insert_db(id, name, data):
 # 修改SQL資料
 def updata_db(id, data):
     i = 0
-    tmp = ['job_A', 'job_B', 'loc_A', 'loc_B', 'loc_C', 'pay', 'exp']
+    tmp = ['job_A', 'job_B', 'loc_A', 'loc_B', 'loc_C', 'pay', 'exp', 'crawler']
     for x in data:
         if x != '#':
             command = f"""UPDATE user SET {tmp[i]} = '{data[i]}' WHERE id = '{id}'"""
@@ -28,7 +28,7 @@ def updata_db(id, data):
 
 # 抓取SQL資料
 def select_db(id):
-    command = f"""SELECT * FROM User WHERE id = '{id}'"""
+    command = f"""SELECT * FROM log WHERE id = '{id}'"""
     con.execute(command)
     result = con.fetchall()  #取得所有資料
     print(result)
@@ -37,6 +37,15 @@ def select_db(id):
 def delete_db(id):
     command = f"""DELETE FROM User WHERE id = '{id}'"""
     con.execute(command)
+
+# 紀錄log
+def log_db(id, name, msg, remsg):
+    time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+    commend = f"""INSERT INTO log (time, id, name, msg, remsg) 
+        VALUES ('{time}', '{id}', '{name}', '{msg}', '{remsg}')"""
+    con.execute(commend)
+    db.commit()
+    db.close()
 
 def main(id, name, msg):
     try:
