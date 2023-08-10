@@ -22,7 +22,7 @@ with open("config.json", "r", encoding="utf8") as J:
 app = Flask(__name__)
 line_bot_api = LineBotApi(j["token"])
 handler = WebhookHandler(j["secret"])
-bg = "https://raw.githubusercontent.com/ChuanPien/LineBot_Updating/main/lib/preview.jpg"
+bg = "https://raw.githubusercontent.com/ChuanPien/104LineBot/main/lib/bg.jpg"
 remsg = ""  # 宣告空字串
 
 
@@ -53,7 +53,7 @@ def message(event):
                 title="主選單",
                 text="請選擇功能",
                 actions=[
-                    PostbackTemplateAction(label="資料填寫表", data="#dataWeb"),
+                    URIAction(label="資料填寫表", uri="https://liff.line.me/2000268560-PDBzXMGm"),
                     PostbackTemplateAction(label="更改是否進行爬蟲", data="#crawler"),
                 ],
             )
@@ -79,11 +79,11 @@ def event(event):
         try:
             remsg = ButtonsTemplate(
                 thumbnail_image_url=bg,
-                title="主選單",
+                title="爬蟲通知",
                 text="請選擇功能",
                 actions=[
-                    PostbackTemplateAction(label="允許爬蟲信息", data="#crawler_yes"),
-                    PostbackTemplateAction(label="不允許爬蟲信息", data="#crawler_no"),
+                    PostbackTemplateAction(label="允許", data="#crawler_yes"),
+                    PostbackTemplateAction(label="不允許", data="#crawler_no"),
                 ],
             )
         except:
@@ -94,26 +94,26 @@ def event(event):
                 TemplateSendMessage(alt_text="Buttons template", template=remsg),
             )
             remsg = "成功送出"
-    elif data == "#dataWeb":
-        try:
-            remsg = ButtonsTemplate(
-                thumbnail_image_url=bg,
-                title="資料填寫表",
-                text="資料填寫表",
-                actions=[
-                    URIAction(
-                        label="資料填寫表", uri="https://liff.line.me/2000268560-PDBzXMGm"
-                    )
-                ],
-            )
-        except:
-            remsg = "發生錯誤"
-        else:
-            line_bot_api.reply_message(
-                event.reply_token,
-                TemplateSendMessage(alt_text="Buttons template", template=remsg),
-            )
-            remsg = "成功送出"
+    # elif data == "#dataWeb":
+    #     try:
+    #         remsg = ButtonsTemplate(
+    #             thumbnail_image_url=bg,
+    #             title="資料填寫表",
+    #             text="資料填寫表",
+    #             actions=[
+    #                 URIAction(
+    #                     label="資料填寫表", uri="https://liff.line.me/2000268560-PDBzXMGm"
+    #                 )
+    #             ],
+    #         )
+    #     except:
+    #         remsg = "發生錯誤"
+    #     else:
+    #         line_bot_api.reply_message(
+    #             event.reply_token,
+    #             TemplateSendMessage(alt_text="Buttons template", template=remsg),
+    #         )
+    #         remsg = "成功送出"
     elif data == "#crawler_yes":
         remsg = db.crawler_db(id, 'yes')
     elif data == "#crawler_no":
