@@ -1,9 +1,9 @@
 function pushMsg(continent, country, town, jobs, job, pay, exp) {
-    //如果是空的就放入"#""
-    if (pay == '') {
+    //如果是空的就放入"#"
+    if (pay != '') {
         pay = '#';
     }
-    if (exp == '') {
+    if (exp != '') {
         exp = '#';
     }
 

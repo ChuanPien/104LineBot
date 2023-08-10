@@ -45,14 +45,12 @@ def log_db(id, name, msg, remsg):
         VALUES ('{time}', '{id}', '{name}', '{msg}', '{remsg}')"""
     con.execute(commend)
     db.commit()
-    db.close()
 
 def crawler_db(id, msg):
     try:
         command = f"""UPDATE user SET crawler = '{msg}' WHERE id = '{id}'"""
         con.execute(command)
         db.commit()
-        db.close()
     except:
         return('發生錯誤')
     else:
