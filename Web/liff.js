@@ -1,9 +1,9 @@
 function pushMsg(continent, country, town, jobs, job, pay, exp) {
     //如果是空的就放入"#"
-    if (pay != '') {
+    if (pay == "") {
         pay = '#';
     }
-    if (exp != '') {
+    if (exp == "") {
         exp = '#';
     }
 
@@ -16,7 +16,7 @@ function pushMsg(continent, country, town, jobs, job, pay, exp) {
     msg += job + ",";
     msg += pay + ",";
     msg += exp;
-
+    
     //回傳訊息字串
     liff.sendMessages([
         {
@@ -28,13 +28,13 @@ function pushMsg(continent, country, town, jobs, job, pay, exp) {
         .then(() => {
             liff.closeWindow();
         })
-        .catch((err) => {
-            console.log('error', err);
-        });
+        // .catch((err) => {
+        //     console.log('error', err);
+        // });
 }
 
 //初始化LIFF
-var liffID = '2000268560-PDBzXMGm'
+var liffID = '2000268560-PDBzXMGm';
 $(document).ready(function () {
     liff.init({
         liffId: liffID
@@ -45,9 +45,10 @@ $(document).ready(function () {
             alert("請用line開啟此網頁呦~");
         } else {
             var context = liff.getContext();
-            console.log(context);
 
             $('#btn-send').click(function () {  //按下確定鈕
+                var pay = document.getElementById('pay').value;
+                var exp = document.getElementById('exp').value;
                 //抓取全部資料
                 pushMsg(
                     $("#continent-list :selected").text(),
@@ -55,8 +56,8 @@ $(document).ready(function () {
                     $("#town-list :selected").text(),
                     $("#job-main-list :selected").text(),
                     $("#job-list :selected").text(),
-                    $("#pay").text(),
-                    $("#exp").text()
+                    pay,
+                    exp
                 );
             });
         }
