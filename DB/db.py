@@ -28,10 +28,14 @@ def updata_db(id, data):
 
 # 抓取SQL資料
 def select_db(id):
-    command = f"""SELECT * FROM log WHERE id = '{id}'"""
+    command = f"""SELECT * FROM user WHERE id = '{id}'"""
     con.execute(command)
-    result = con.fetchall()  #取得所有資料
-    print(result)
+    data = con.fetchone()
+    if data:
+        data = f'姓名:{data[1]}\n洲/國家:{data[2]}\n縣市:{data[3]}\n區:{data[4]}\n職業類別:{data[5]}\n職稱:{data[6]}\n薪資:{data[7]}\n年資:{data[8]}\n爬蟲通知:{data[9]}'
+        return(data)
+    else:
+        return('目前沒有您的資料哦~')
 
 # 刪除SQL資料
 def delete_db(id):
@@ -74,9 +78,8 @@ def main(id, name, msg):
         msg = "發生錯誤!"
         raise
     else:
-        #資料庫存檔並關閉
+        #資料庫存檔
         db.commit()
-        db.close()
         msg = "資料儲存成功!"
     
     return msg

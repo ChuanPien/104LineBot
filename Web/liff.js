@@ -7,9 +7,9 @@ function pushMsg(continent, country, town, jobs, job, pay, exp, crawler) {
         exp = '#';
     }
     if (crawler == 'on'){
-        crawler = 'yes'
+        crawler = '是'
     }else{
-        crawler = 'no'
+        crawler = '否'
     }
     //將所有字串加在一起並加上逗號便於之後分割
     var msg = "##,";  

@@ -23,7 +23,7 @@ app = Flask(__name__)
 line_bot_api = LineBotApi(j["token"])
 handler = WebhookHandler(j["secret"])
 bg = "https://raw.githubusercontent.com/ChuanPien/104LineBot/main/lib/bg.jpg"
-
+remsg = ''
 
 # 基底碼
 @app.route("/", methods=["POST"])
@@ -39,13 +39,16 @@ def callback():
 
 # 接收Line客戶端訊息
 @handler.add(MessageEvent, message=TextMessage)  # 如果訊息是文字
-def message(event):
+def message(event, remsg):
     msg = event.message.text  # 將收到的文字放入msg中
     id = event.source.user_id  # 抓取使用者id
     name = line_bot_api.get_profile(id).display_name  # 抓取使用者姓名
-    if msg.startswith("##,"):  # 如果開頭是##,
+
+    # 如果開頭是##,
+    if msg.startswith("##,"):
         remsg = db.main(id, name, msg)  # 呼叫函式，並取得remsg回傳
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=remsg))
+    # 如果信息是#主選單
     elif msg == "#主選單":
         try:
             #圖文選單
@@ -56,34 +59,41 @@ def message(event):
                 actions=[
                     URIAction(label="資料填寫表", uri="https://liff.line.me/2000268560-PDBzXMGm"),
                     PostbackTemplateAction(label="更改爬蟲通知", data="#crawler",text="更改爬蟲通知"),
-                    PostbackTemplateAction(label="刪除資料", data="#del",text="刪除資料")
+                    PostbackTemplateAction(label="查看資料", data="#check",text="查看資料"),
+                    PostbackTemplateAction(label="刪除資料", data="#delete",text="刪除資料")
                 ],
             )
-        except:
-            remsg = "發生錯誤"
-        else:
-            #先回覆圖文選單，再將回復狀態簡化，以便於記錄到log
+            #送出圖文選單
             line_bot_api.reply_message(
                 event.reply_token,
                 TemplateSendMessage(alt_text="Buttons template", template=remsg),
             )
+        #將回復狀態簡化，以便於記錄到log
+        except:
+            remsg = "發生錯誤"
+        else:
             remsg = "成功送出"
 
     db.log_db(id, name, msg, remsg)  # 呼叫log函式
 
 
 @handler.add(PostbackEvent)
-def event(event):
+def event(event, remsg):
     data = event.postback.data  # 將收到的資料放入data中
     id = event.source.user_id  # 抓取使用者id
     name = line_bot_api.get_profile(id).display_name # 抓取使用者資料
+
     #如果資料是#crawler_yes，呼叫更改通知函式
     if data == "#crawler_yes":
-        remsg = db.crawler_db(id, 'yes')
+        remsg = db.crawler_db(id, '是')
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=remsg))
     #如果資料是#crawler_no，呼叫更改通知函式
     elif data == "#crawler_no":
-        remsg = db.crawler_db(id, 'no')
+        remsg = db.crawler_db(id, '否')
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=remsg))
+    #如果資料是#check，呼叫查看資料函式
+    elif data == "#check":
+        remsg = db.select_db(id)
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=remsg))
     #如果資料是#delete，再回傳一次圖文選單進行二次確認
     elif data == "#delete":
@@ -98,14 +108,15 @@ def event(event):
                     PostbackTemplateAction(label="取消", data="#cen", text="取消"),
                 ],
             )
-        except:
-            remsg = "發生錯誤"
-        else:
-            #先回覆圖文選單，再將回復狀態簡化，以便於記錄到log
+            #送出圖文選單
             line_bot_api.reply_message(
                 event.reply_token,
                 TemplateSendMessage(alt_text="Buttons template", template=remsg),
             )
+        #將回復狀態簡化，以便於記錄到log
+        except:
+            remsg = "發生錯誤"
+        else:
             remsg = "確認刪除"
     #如果資料是#del，呼叫刪除函式
     elif data == "#del":
@@ -132,6 +143,7 @@ def event(event):
                 TemplateSendMessage(alt_text="Buttons template", template=remsg),
             )
             remsg = "成功送出"
+    
     db.log_db(id, name, data, remsg)  # 呼叫log函式
 
 
