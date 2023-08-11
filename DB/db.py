@@ -27,15 +27,18 @@ def updata_db(id, data):
         i += 1
 
 # 抓取SQL資料
-def check_db(id):
+def check_db(id, cra = False):
     command = f"""SELECT * FROM user WHERE id = '{id}'"""
     con.execute(command)
     data = con.fetchone()
-    if data:
-        data = f'姓名:{data[1]}\n洲/國家:{data[2]}\n縣市:{data[3]}\n區:{data[4]}\n職業類別:{data[5]}\n職稱:{data[6]}\n薪資:{data[7]}\n年資:{data[8]}\n爬蟲通知:{data[9]}'
-        return(data)
+    if not cra:
+        if data:
+            data = f'姓名:{data[1]}\n洲/國家:{data[2]}\n縣市:{data[3]}\n區:{data[4]}\n職業類別:{data[5]}\n職稱:{data[6]}\n薪資:{data[7]}\n年資:{data[8]}\n爬蟲通知:{data[9]}'
+            return(data)
+        else:
+            return('目前沒有您的資料哦~')
     else:
-        return('目前沒有您的資料哦~')
+        return(data)
 
 # 刪除SQL資料
 def delete_db(id):
@@ -55,7 +58,15 @@ def log_db(id, name, msg, remsg):
     con.execute(commend)
     db.commit()
 
-def crawler_db(id, msg):
+# 檢查爬蟲通知
+def check_crawler_db():
+    command = f"""SELECT id FROM user WHERE crawler = 'yes'"""
+    con.execute(command)
+    data = con.fetchall()
+    return(data)
+
+# 更改爬蟲通知
+def updata_crawler_db(id, msg):
     try:
         command = f"""UPDATE user SET crawler = '{msg}' WHERE id = '{id}'"""
         con.execute(command)

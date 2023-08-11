@@ -36,17 +36,13 @@ def write_json(new_data):
 
 
 #設定Chrome參數
-def setup():
-    s = Service(j['driver'])
-    options = Options()
-    options.add_experimental_option('useAutomationExtension', False)
-    options.add_experimental_option("excludeSwitches", ['enable-automation'])
-    global driver
-    driver = webdriver.Chrome(service=s, options=options)
-    # driver.maximize_window()                                          #全螢幕
-    driver.get("https://www.104.com.tw/jobs/main/")                     #連到104網頁
+s = Service(j['driver'])
+options = Options()
+options.add_experimental_option('useAutomationExtension', False)
+options.add_experimental_option("excludeSwitches", ['enable-automation'])
+driver = webdriver.Chrome(service=s, options=options)
+driver.get("https://www.104.com.tw/jobs/main/")                     #連到104網頁
 
-setup()
 
 #等待網頁元素出現
 WebDriverWait(driver, 100.0).until(
@@ -55,7 +51,7 @@ WebDriverWait(driver, 100.0).until(
 
 #模擬點擊[職務類別選單]
 ijob = driver.find_element(By.ID, "icity")                          #icity資料選單/ijob資料選單
-action = ActionChains(driver).click(ijob).perform()
+ActionChains(driver).click(ijob).perform()
 
 #等待網頁元素出現
 WebDriverWait(driver, 100.0).until(
@@ -68,15 +64,14 @@ x = 0
 for arrow in arrows:
     i = 0
     data = []
-    action = ActionChains(driver).click(arrow).perform()                            #依序打開
+    ActionChains(driver).click(arrow).perform()                            #依序打開
     l2s = driver.find_elements(By.CLASS_NAME, "category-item--level-two")
     ardowns = driver.find_elements(By.CLASS_NAME, "arrow--down")                    #抓取中類別
     for l2 in l2s:
         print('{"value": "option' + f'{x}' + '", "text":"' + f'{l2.text}'+'"},')
         x+=1
     # for ardown in ardowns[1:]:
-    #     action = ActionChains(driver).click(ardown).perform()                       #依序打開
-    #     l2s = driver.find_elements(By.CLASS_NAME, "category-item--level-two")       #抓取中類別
+    #     ActionChains(driver).click(ardown).perform()                       #依序打開
     #     l3s = driver.find_elements(By.CLASS_NAME, "category-item--level-three")     #抓取小類別
     #     time.sleep(0.2)                                                             #等待0.2秒
     #     #依序將l3s中的文字提出並放入data陣列中
@@ -89,7 +84,7 @@ for arrow in arrows:
     #     data.clear()                                                                 #清空data資料
     #     i += 1
     #     arrowup = driver.find_element(By.CLASS_NAME, "arrow--up")                   #抓取打開的小類別
-    #     actions = ActionChains(driver).click(arrowup).perform()                     #關閉小類別
+    #     ActionChains(driver).click(arrowup).perform()                     #關閉小類別
     #     time.sleep(0.3)                                                             #等待0.3秒
 
 # wb.save('data.xlsx')                                                                #excel存檔

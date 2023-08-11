@@ -85,11 +85,11 @@ def event(event, remsg):
 
     #如果資料是#crawler_yes，呼叫更改通知函式
     if data == "#crawler_yes":
-        remsg = db.crawler_db(id, '是')
+        remsg = db.updata_crawler_db(id, '是')
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=remsg))
     #如果資料是#crawler_no，呼叫更改通知函式
     elif data == "#crawler_no":
-        remsg = db.crawler_db(id, '否')
+        remsg = db.updata_crawler_db(id, '否')
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=remsg))
     #如果資料是#check，呼叫查看資料函式
     elif data == "#check":
