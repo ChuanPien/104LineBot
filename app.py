@@ -93,7 +93,7 @@ def event(event, remsg):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=remsg))
     #如果資料是#check，呼叫查看資料函式
     elif data == "#check":
-        remsg = db.select_db(id)
+        remsg = db.check_db(id)
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=remsg))
     #如果資料是#delete，再回傳一次圖文選單進行二次確認
     elif data == "#delete":

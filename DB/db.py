@@ -27,7 +27,7 @@ def updata_db(id, data):
         i += 1
 
 # 抓取SQL資料
-def select_db(id):
+def check_db(id):
     command = f"""SELECT * FROM user WHERE id = '{id}'"""
     con.execute(command)
     data = con.fetchone()
