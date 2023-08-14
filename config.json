@@ -4,7 +4,7 @@
     "token":"KZH3boCjksx7PilSgn1mW1riRdAeGiOCgA6/oPixEWWEzGrXTSURHbXF58GTBaTU5hFLr254TPMDZN+FN8u80PfkASu4cvYlqIQ5n3mZUdHtlM/CrjAMupJsfhxXzUYh2mv5RaMujWcLOCWjpZg/jAdB04t89/1O/w1cDnyilFU=",
     "N_token":"4mNmdpSPZPNsPtryTpQDr2HbnHBEUvj15deUuFQvNqC",
     "db_settings" : {
-        "host" : "192.168.1.60",
+        "host" : "220.135.215.124",
         "user" : "ChuanPien",
         "passwd" : "",
         "database" : "LineBot",

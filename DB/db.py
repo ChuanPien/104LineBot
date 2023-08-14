@@ -5,21 +5,21 @@ import pymysql, json, datetime
 with open('./config.json', 'r', encoding='utf8')as J:
     j = json.load(J)
 
-# 連接絲料庫
+# 連接資料庫
 db_settings = j["db_settings"]
 db = pymysql.connect(**db_settings)
 con = db.cursor()
 
 # 新增SQL資料
 def insert_db(id, name, data):
-    commend = f"""INSERT INTO user (id, name, job_A, job_B, loc_A, loc_B, loc_C, pay, exp, crawler) 
-        VALUES ('{id}', '{name}', '{data[0]}', '{data[1]}', '{data[2]}', '{data[3]}', '{data[4]}', '{data[5]}', '{data[6]}', '{data[7]}')"""
+    commend = f"""INSERT INTO user (id, name, job_A, job_B, loc_A, loc_B, loc_C, scmin, scmax, exp, crawler) 
+        VALUES ('{id}', '{name}', '{data[0]}', '{data[1]}', '{data[2]}', '{data[3]}', '{data[4]}', '{data[5]}', '{data[6]}','{data[7]}', '{data[8]}')"""
     con.execute(commend)
 
 # 修改SQL資料
 def updata_db(id, data):
     i = 0
-    tmp = ['job_A', 'job_B', 'loc_A', 'loc_B', 'loc_C', 'pay', 'exp', 'crawler']
+    tmp = ['job_A', 'job_B', 'loc_A', 'loc_B', 'loc_C', 'scmin', 'scmax', 'exp', 'crawler']
     for x in data:
         if x != '#':
             command = f"""UPDATE user SET {tmp[i]} = '{data[i]}' WHERE id = '{id}'"""
@@ -31,12 +31,14 @@ def check_db(id, cra = False):
     command = f"""SELECT * FROM user WHERE id = '{id}'"""
     con.execute(command)
     data = con.fetchone()
+    # 如果是line使用者查看資料
     if not cra:
         if data:
-            data = f'姓名:{data[1]}\n洲/國家:{data[2]}\n縣市:{data[3]}\n區:{data[4]}\n職業類別:{data[5]}\n職稱:{data[6]}\n薪資:{data[7]}\n年資:{data[8]}\n爬蟲通知:{data[9]}'
+            data = f'姓名:{data[1]}\n洲/國家:{data[2]}\n縣市:{data[3]}\n區:{data[4]}\n職業類別:{data[5]}\n職稱:{data[6]}\n薪資:{data[7]}/{data[8]}\n年資:{data[9]}\n爬蟲通知:{data[10]}'
             return(data)
         else:
             return('目前沒有您的資料哦~')
+    # 如果不是line使用者查看資料
     else:
         return(data)
 
@@ -58,9 +60,9 @@ def log_db(id, name, msg, remsg):
     con.execute(commend)
     db.commit()
 
-# 檢查爬蟲通知
+# 檢查有哪些使用者要接收爬蟲通知
 def check_crawler_db():
-    command = f"""SELECT id FROM user WHERE crawler = 'yes'"""
+    command = f"""SELECT id FROM user WHERE crawler = '允許'"""         #抓取全部'crawler'為允許的使用者id
     con.execute(command)
     data = con.fetchall()
     return(data)

@@ -1,15 +1,15 @@
-function pushMsg(continent, country, town, jobs, job, pay, exp, crawler) {
+function pushMsg(continent, country, town, jobs, job, scmin, scmax, exp, crawler) {
     //如果是空的就放入"#"
-    if (pay == "") {
-        pay = '#';
+    if (scmin == "") {
+        scmin = '#';
     }
     if (exp == "") {
         exp = '#';
     }
     if (crawler == 'on'){
-        crawler = '是'
+        crawler = '允許'
     }else{
-        crawler = '否'
+        crawler = '不允許'
     }
     //將所有字串加在一起並加上逗號便於之後分割
     var msg = "##,";  
@@ -18,7 +18,8 @@ function pushMsg(continent, country, town, jobs, job, pay, exp, crawler) {
     msg += town + ",";
     msg += jobs + ",";
     msg += job + ",";
-    msg += pay + ",";
+    msg += scmin + ",";
+    msg += scmax + ",";
     msg += exp + ",";
     msg += crawler;
 
@@ -59,7 +60,8 @@ $(document).ready(function () {
                     $("#town-list :selected").text(),
                     $("#job-main-list :selected").text(),
                     $("#job-list :selected").text(),
-                    $("#pay").val(),
+                    $("#scmin").val(),
+                    $("#scmax").val(),
                     $("#exp").val(),
                     $('#crawler:checked').val()
                 );
