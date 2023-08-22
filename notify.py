@@ -11,10 +11,9 @@ userid = db.check_crawler_db()
 for i in userid:
     userData = db.check_db(i[0], True)
     remsg = main(userData[2:])
-    print(remsg)
     # HTTP 標頭參數與資料
-    # headers = {"Authorization": "Bearer " + token}
-    # data = {"message": remsg}
+    headers = {"Authorization": "Bearer " + token}
+    data = {"message": remsg}
 
     # # 以 requests 發送 POST 請求
-    # requests.post("https://notify-api.line.me/api/notify", headers=headers, data=data)
+    requests.post("https://notify-api.line.me/api/notify", headers=headers, data=data)
